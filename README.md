@@ -1,3 +1,7 @@
+# Note
+
+There is always room for improvement in how the functionality is implemented but it is fully functional in its current state. Suggestions and contributions are welcome.
+
 # Features
 
 - Ability to throw configured items.
