@@ -97,3 +97,7 @@ RegisterNUICallback('giveItem', function(data, cb)
     end
 end)
 ```
+
+**ox.cfg**
+
+Make sure the `inventory:giveplayerlist` convar is set to false otherwise it will just utilize the default give item features
