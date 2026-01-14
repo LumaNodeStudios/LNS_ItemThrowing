@@ -1,11 +1,8 @@
 return {
-    -- Time in milliseconds before the stash auto-removes
-    PropLifetime = 300000, -- 5 minutes
+    PropLifetime = 300000, -- Time in milliseconds before the stash auto-removes (Default: 5 Minutes)
 
-    -- Throw force multiplier
-    ThrowForce = 30,
+    ThrowForce = 15, -- Adjust to your liking
 
-    -- Security
     CooldownTime = 1000, -- 1 second between throws/places
     MaxThrowDistance = 50.0, -- Maximum distance a prop can travel
     PickupDistance = 2.5, -- Maximum pickup distance
