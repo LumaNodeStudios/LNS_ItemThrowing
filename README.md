@@ -3,7 +3,7 @@
 - Ability to throw configured items.
 - Interactive placement mode with rotation and surface detection
 - World props that all players can see and pick up
-- Safety Distance validation, cooldowns and automatic cleanup
+- Safety Distance validation, cooldowns, automatic cleanup and fallbacks for non configured items
 
 # Requirements
 - [ox_inventory](https://github.com/CommunityOx/ox_inventory)

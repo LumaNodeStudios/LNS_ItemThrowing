@@ -181,7 +181,15 @@ local function StartGiveMode(itemName, slot, count)
     
     local propModel = Settings.ItemModels[itemName]
     if not propModel then
-        return lib.notify({description = 'This item cannot be given in preview mode', type = 'error'})
+        local nearbyPlayers = lib.getNearbyPlayers(GetEntityCoords(cache.ped), 3.0)
+        if #nearbyPlayers == 0 then
+            return lib.notify({description = 'No nearby players', type = 'error'})
+        end
+        
+        local targetPlayer = nearbyPlayers[1]
+        local targetId = GetPlayerServerId(targetPlayer.id)
+        exports.ox_inventory:giveItemToTarget(targetId, slot, count)
+        return
     end
     
     givingItem = true
