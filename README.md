@@ -14,7 +14,7 @@
 
 **ox_inventory/client.lua**
 
-```
+```lua
 RegisterNUICallback('giveItem', function(data, cb)
     cb(1)
 
