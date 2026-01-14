@@ -88,7 +88,7 @@ local function MakeItemThrowable(itemName, propModel, slot)
                 local throwCoord
 
                 if IsPedInAnyVehicle(ped, false) then
-                    local veh = GetVehiclePedIsIn(ped, false)
+                    local veh = cache.vehicle
                     local vehCoords = GetEntityCoords(veh)
                     local forward = GetEntityForwardVector(veh)
                     throwCoord = vehCoords + (forward * 2.0) + vec3(0, 0, 0.5)
@@ -111,7 +111,7 @@ local function MakeItemThrowable(itemName, propModel, slot)
                 local forceVec = vec3(-math.sin(radRot.z) * math.abs(math.cos(radRot.x)) * force, math.cos(radRot.z) * math.abs(math.cos(radRot.x)) * force, math.sin(radRot.x) * force)
 
                 if IsPedInAnyVehicle(ped, false) then
-                    local veh = GetVehiclePedIsIn(ped, false)
+                    local veh = cache.vehicle
                     local vehVel = GetEntityVelocity(veh)
                     forceVec = forceVec + (vehVel * 0.5)
                 end
