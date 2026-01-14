@@ -101,3 +101,5 @@ end)
 **ox.cfg**
 
 Make sure the `inventory:giveplayerlist` convar is set to false otherwise it will just utilize the default give item features
+
+Should look like this `setr inventory:giveplayerlist false`
