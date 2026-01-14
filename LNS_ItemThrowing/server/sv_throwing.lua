@@ -164,3 +164,5 @@ end)
 AddEventHandler('playerDropped', function()
     cooldowns[source] = nil
 end)
+
+lib.versionCheck('LumaNodeStudios/LNS_ItemThrowing')
