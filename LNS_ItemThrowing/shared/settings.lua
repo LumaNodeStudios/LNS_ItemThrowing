@@ -10,6 +10,7 @@ return {
     MaxThrowDistance = 50.0, -- Maximum distance a prop can travel
     PickupDistance = 2.5, -- Maximum pickup distance
     MaxPlaceDistance = 10.0, -- Maximum raycast distance for placement
+    MaxGiveDistance = 3.0, -- This is the max distance for giving items
 
     -- Item to prop model mapping
     ItemModels = {

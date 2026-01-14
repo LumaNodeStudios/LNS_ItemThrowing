@@ -181,7 +181,7 @@ local function StartGiveMode(itemName, slot, count)
     
     local propModel = Settings.ItemModels[itemName]
     if not propModel then
-        local nearbyPlayers = lib.getNearbyPlayers(GetEntityCoords(cache.ped), 3.0)
+        local nearbyPlayers = lib.getNearbyPlayers(GetEntityCoords(cache.ped), Settings.MaxGiveDistance)
         if #nearbyPlayers == 0 then
             return lib.notify({description = 'No nearby players', type = 'error'})
         end
@@ -258,7 +258,7 @@ local function StartGiveMode(itemName, slot, count)
                         local targetId = GetPlayerServerId(NetworkGetPlayerIndexFromPed(hitEntity))
                         local dist = #(GetEntityCoords(ped) - GetEntityCoords(hitEntity))
                         
-                        if dist <= 3.0 then
+                        if dist <= Settings.MaxGiveDistance then
                             exports.ox_inventory:giveItemToTarget(targetId, currentGiveData.slot, currentGiveData.count)
                             if DoesEntityExist(previewProp) then DeleteEntity(previewProp) end
                             givingItem = false
