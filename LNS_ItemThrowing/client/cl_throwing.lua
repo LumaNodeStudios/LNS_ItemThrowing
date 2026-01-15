@@ -357,6 +357,22 @@ exports('startGiveMode', function(itemName, slot, count)
     StartGiveMode(itemName, slot, count)
 end)
 
+RegisterNetEvent('LNS_ItemThrowing:clientPickupItem', function(propId)
+    local ped = cache.ped
+    
+    lib.requestAnimDict('pickup_object', 1000)
+    TaskPlayAnim(ped, 'pickup_object', 'pickup_low', 8.0, -8.0, 1000, 1, 0, false, false, false)
+    
+    Wait(1200)
+    
+    local success = lib.callback.await('LNS_ItemThrowing:pickupItem', false, propId)
+    if not success then
+        lib.notify({description = 'Failed to pickup item', type = 'error'})
+    end
+    
+    ClearPedTasks(ped)
+end)
+
 RegisterNetEvent('LNS_ItemThrowing:registerTarget', function(propId, netId)
     CreateThread(function()
         local entity
@@ -376,10 +392,7 @@ RegisterNetEvent('LNS_ItemThrowing:registerTarget', function(propId, netId)
                 label = 'Pick Up Item',
                 distance = 2.0,
                 onSelect = function()
-                    local success = lib.callback.await('LNS_ItemThrowing:pickupItem', false, propId)
-                    if not success then
-                        lib.notify({description = 'Failed to pickup item', type = 'error'})
-                    end
+                    TriggerEvent('LNS_ItemThrowing:clientPickupItem', propId)
                 end
             }
         })
