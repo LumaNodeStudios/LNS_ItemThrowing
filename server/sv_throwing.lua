@@ -169,29 +169,28 @@ CreateThread(function()
     local resource = GetCurrentResourceName()
     local currentVersion = GetResourceMetadata(resource, 'version', 0) or '1.0.0'
     
-    PerformHttpRequest('https://api.github.com/repos/LumaNodeStudios/LNS_ItemThrowing/releases/latest', function(status, response, headers)
+    PerformHttpRequest('https://raw.githubusercontent.com/LumaNodeStudios/LNS_ItemThrowing/main/fxmanifest.lua', function(status, response, headers)
         if status ~= 200 then
-            print('^3[' .. resource .. '] ^7Unable to check for updates^0')
+            print('^3[' .. resource .. '] ^7Unable to check for updates (Status: ' .. status .. ')^0')
             return
         end
         
-        local data = json.decode(response)
-        if not data or not data.tag_name then
-            print('^3[' .. resource .. '] ^7Unable to parse version data^0')
+        local latestVersion = response:match("version%s+'([%d%.]+)'") or response:match('version%s+"([%d%.]+)"')
+        
+        if not latestVersion then
+            print('^3[' .. resource .. '] ^7Unable to parse version from GitHub^0')
             return
         end
-        
-        local latestVersion = data.tag_name:gsub('v', '')
         
         if currentVersion ~= latestVersion then
             print('^0====================================^0')
             print('^3[' .. resource .. '] ^1Update Available!^0')
             print('^7Current Version: ^3' .. currentVersion .. '^0')
             print('^7Latest Version: ^2' .. latestVersion .. '^0')
-            print('^7Download: ^5' .. data.html_url .. '^0')
+            print('^7Download: ^5https://github.com/LumaNodeStudios/LNS_ItemThrowing^0')
             print('^0====================================^0')
         else
             print('^2[' .. resource .. '] ^7You are running the latest version (^2' .. currentVersion .. '^7)^0')
         end
-    end, 'GET', '', {['Content-Type'] = 'application/json'})
+    end, 'GET')
 end)
