@@ -165,4 +165,33 @@ AddEventHandler('playerDropped', function()
     cooldowns[source] = nil
 end)
 
-lib.versionCheck('LumaNodeStudios/LNS_ItemThrowing')
+CreateThread(function()
+    local resource = GetCurrentResourceName()
+    local currentVersion = GetResourceMetadata(resource, 'version', 0) or '1.0.0'
+    
+    PerformHttpRequest('https://api.github.com/repos/LumaNodeStudios/LNS_ItemThrowing/releases/latest', function(status, response, headers)
+        if status ~= 200 then
+            print('^3[' .. resource .. '] ^7Unable to check for updates^0')
+            return
+        end
+        
+        local data = json.decode(response)
+        if not data or not data.tag_name then
+            print('^3[' .. resource .. '] ^7Unable to parse version data^0')
+            return
+        end
+        
+        local latestVersion = data.tag_name:gsub('v', '')
+        
+        if currentVersion ~= latestVersion then
+            print('^0====================================^0')
+            print('^3[' .. resource .. '] ^1Update Available!^0')
+            print('^7Current Version: ^3' .. currentVersion .. '^0')
+            print('^7Latest Version: ^2' .. latestVersion .. '^0')
+            print('^7Download: ^5' .. data.html_url .. '^0')
+            print('^0====================================^0')
+        else
+            print('^2[' .. resource .. '] ^7You are running the latest version (^2' .. currentVersion .. '^7)^0')
+        end
+    end, 'GET', '', {['Content-Type'] = 'application/json'})
+end)
