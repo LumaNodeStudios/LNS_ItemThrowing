@@ -4,7 +4,7 @@ lua54 'yes'
 
 author 'LumaNode Studios'
 description 'LumaNode Studios - Item Throwing'
-version '1.0.1'
+version '1.0.0'
 
 shared_scripts {
     '@ox_lib/init.lua',
